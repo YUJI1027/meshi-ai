@@ -2,6 +2,14 @@
     <div class="min-h-screen bg-orange-50 flex items-center justify-center px-4">
         <div class="w-full max-w-lg">
             <div class="text-center mb-8">
+                <div class="flex justify-end mb-2">
+                    <button 
+                        @click="router.push('/favorites')"
+                        class="text-orange-400 font-bold text-sm"
+                    >
+                        ❤️ お気に入り
+                    </button>
+                </div>
                 <h1 class="text-5xl font-bold mb-2">🍽️ MeshiAI</h1>
                 <p class="text-gray-500 text-lg">今日、何食べたい？</p>
             </div>
@@ -62,8 +70,8 @@ const location = ref('')
 const loading = ref(false)
 
 // ==========
-// 
-// =========
+// 検索機能
+// ==========
 const search = async () => {
     if (!genre.value || !location.value) {
         alert('ジャンルとエリアを入力してください')

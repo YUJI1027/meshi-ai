@@ -3,6 +3,7 @@ import { supabase } from '../supabase.js'
 import SearchView from '../views/SearchView.vue'
 import ResultView from '../views/ResultView.vue'
 import LoginView from '../views/LoginView.vue'
+import FavoritesView from '../views/FavoritesView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -17,6 +18,12 @@ const router = createRouter({
       path: '/result',
       name: 'result',
       component: ResultView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: FavoritesView,
       meta: { requiresAuth: true }
     },
     {
