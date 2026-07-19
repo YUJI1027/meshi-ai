@@ -43,7 +43,7 @@ router.beforeEach(async (to) => {
     return { name: 'login' }
   }
 
-  if (to.name === 'login' && !isLoggedIn) {
+  if (to.name === 'login' && isLoggedIn) {
     return { name: 'search' }
   }
 })

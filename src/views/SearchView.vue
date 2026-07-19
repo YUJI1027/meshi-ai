@@ -82,7 +82,7 @@ const search = async () => {
     try {
         const query = mood.value ? `${mood.value} ${genre.value}` : genre.value
         const res = await fetch(
-            `http://localhost:8000/search?query=${encodeURIComponent(query)}&location=${encodeURIComponent(location.value)}`
+            `https://meshi-ai-backend.onrender.com/search?query=${encodeURIComponent(query)}&location=${encodeURIComponent(location.value)}`
         )
         const data = await res.json()
         router.push({ name: 'result', state: { data } })
