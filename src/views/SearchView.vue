@@ -69,7 +69,6 @@
                         </button>
                     </div>
                 </div>
-
                 <button 
                     @click="search"
                     :disabled="loading"
