@@ -11,6 +11,16 @@
 
         <p class="text-xs text-gray-500">📍 {{ shop.address }}</p>
 
+        <div class="flex gap-2 mt-1">
+            <a 
+                :href="`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(shop.name + '' + shop.address)}`"
+                target="_blank"
+                class="text-xs text-blue-400 font-bold"
+            >
+                🗺️ Googleマップで開く
+            </a>
+        </div>
+
         <button 
             @click="toggleFavorite"
             class="text-sm mt-1"

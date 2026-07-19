@@ -23,7 +23,7 @@
                     v-model="mood"
                     placeholder="例：今日はラーメンが食べたい！疲れたので優しい味のものが食べたい"
                     rows="3"
-                    class="border border-gray-200 rounded-xl p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-orange-300"
+                    class="border border-gray-200 rounded-xl p-3 text-base resize-none focus:outline-none focus:ring-2 focus:ring-orange-300"
                 ></textarea>
             </div>
 
@@ -32,7 +32,7 @@
                 <input 
                     v-model="genre"
                     placeholder="例：ラーメン、カレー、寿司"
-                    class="border border-gray-200 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300"
+                    class="border border-gray-200 rounded-xl p-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
                 />
             </div>
 
@@ -41,7 +41,7 @@
                 <input 
                     v-model="location"
                     placeholder="例：渋谷、新宿、池袋"
-                    class="border border-gray-200 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300"
+                    class="border border-gray-200 rounded-xl p-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
                 />
             </div>
 
