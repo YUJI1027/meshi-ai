@@ -56,7 +56,7 @@
                     <label class="font-bold text-sm">エリア</label>
                     <div class="flex gap-1">
                         <input 
-                            v-model="location"
+                            v-model="area"
                             placeholder="例：渋谷、新宿"
                             class="border border-gray-200 rounded-xl p-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-300 flex-1"
                         />
@@ -107,16 +107,19 @@ import { supabase } from '../supabase.js'
 const router = useRouter()
 const mood = ref('')
 const genre = ref('')
-const location = ref('')
+const area = ref('')
 const loading = ref(false)
 
 const quickTags = ['ラーメン', '寿司', '焼肉', 'イタリアン', '居酒屋', 'カフェ', '中華', 'カレー',]
+
+const currentLat = ref(null)
+const currentLng = ref(null)
 
 // ==========
 // 検索機能
 // ==========
 const search = async () => {
-    if (!genre.value || !location.value) {
+    if (!genre.value || !area.value) {
         alert('ジャンルとエリアを入力してください')
         return
     }
@@ -124,8 +127,13 @@ const search = async () => {
     loading.value = true
     try {
         const query = mood.value ? `${mood.value} ${genre.value}` : genre.value
+        // 現在地の場所は緯度経度を送る
+        const locationParam = (currentLat.value && area.value === '現在地')
+            ? `${currentLat.value},${currentLng.value}`
+            :   area.value
+        
         const res = await fetch(
-            `https://meshi-ai-backend.onrender.com/search?query=${encodeURIComponent(query)}&location=${encodeURIComponent(location.value)}`
+            `https://meshi-ai-backend.onrender.com/search?query=${encodeURIComponent(query)}&location=${encodeURIComponent(locationParam)}`
         )
         const data = await res.json()
         router.push({ name: 'result', state: { data } })
@@ -140,16 +148,20 @@ const search = async () => {
 // 位置情報の取得
 // ==============
 const getCurrentLocation = () => {
-    if (!navigator.getCurrentLocation) {
+    if (!navigator.geolocation) {
         alert('位置情報がサポートされていません')
         return
     }
-    navigator.geolocation.getCurrentLocation(
+    navigator.geolocation.getCurrentPosition(
         (pos) => {
-            location.value = `${pos.coords.latitude},${pos.coords.longitude}`     
+            // 実際の座標は別変数に保存
+            currentLat.value = pos.coords.latitude
+            currentLng.value = pos.coords.longitude
+            area.value = '現在地' 
         },
-        () => {
-            alert('位置情報の取得に失敗しました')
+        (err) => {
+            console.log('エラー：', err)
+            alert('位置情報の取得に失敗しました：', err.message)
         }
     )
 }
