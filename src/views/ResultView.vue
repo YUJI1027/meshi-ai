@@ -2,7 +2,7 @@
     <div class="min-h-screen bg-orange-50 px-4 py-8">
         <div class="w-full max-w-lg mx-auto">
             <button 
-                @click="router.push('/')"
+                @click="router.push('/search')"
                 class="text-orange-400 font-bold mb-6 flex items-center gap-1"
             >
                 ⇐戻る
