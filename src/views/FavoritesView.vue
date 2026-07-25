@@ -3,7 +3,7 @@
         <div class="w-full max-w-lg mx-auto">
             <div class="flex justify-between items-center mb-6">
                 <button 
-                    @click="router.push('/')"
+                    @click="router.push('/search')"
                     class="text-orange-400 font-bold flex items-center gap-1"
                 >
                     ⇐戻る

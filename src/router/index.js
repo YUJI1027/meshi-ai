@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { supabase } from '../supabase.js'
+import LandingView from '../views/LandingView.vue'
 import SearchView from '../views/SearchView.vue'
 import ResultView from '../views/ResultView.vue'
 import LoginView from '../views/LoginView.vue'
@@ -10,6 +11,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'landing',
+      component: LandingView,
+    },
+    {
+      path: '/search',
       name: 'search',
       component: SearchView,
       meta: { requiresAuth: true }
