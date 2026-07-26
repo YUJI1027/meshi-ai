@@ -69,6 +69,24 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- 表示件数選択 -->
+                <div class="flex flex-col gap-1">
+                    <label class="font-bold text-sm">表示件数</label>
+                    <div class="flex gap-2">
+                        <button 
+                            v-for="count in countOptions"
+                            :key="count"
+                            @click="resultCount = count"
+                            :class="resultCount === count
+                                ?  'bg-orange-400 text-white'
+                                :   'bg-white text-gray-600 border border-gray-200'"
+                            class="px-4 py-2 rounded-xl text-sm font-bold transition-colors"
+                        >
+                            {{ count }}件
+                        </button>
+                    </div>
+                </div>
                 <button 
                     @click="search"
                     :disabled="loading"
@@ -115,6 +133,9 @@ const quickTags = ['ラーメン', '寿司', '焼肉', 'イタリアン', '居�
 const currentLat = ref(null)
 const currentLng = ref(null)
 
+const resultCount =  ref(5)
+const countOptions = [3, 5, 7]
+
 // ==========
 // 検索機能
 // ==========
@@ -133,7 +154,7 @@ const search = async () => {
             :   area.value
         
         const res = await fetch(
-            `https://meshi-ai-backend.onrender.com/search?query=${encodeURIComponent(query)}&location=${encodeURIComponent(locationParam)}`
+            `https://meshi-ai-backend.onrender.com/search?query=${encodeURIComponent(query)}&location=${encodeURIComponent(locationParam)}&count=${resultCount.value}`
         )
         const data = await res.json()
         router.push({ name: 'result', state: { data } })
