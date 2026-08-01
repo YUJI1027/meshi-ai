@@ -161,7 +161,13 @@ const search = async () => {
             `https://meshi-ai-backend.onrender.com/search?query=${encodeURIComponent(query)}&location=${encodeURIComponent(locationParam)}&count=${resultCount.value}`
         )
         const data = await res.json()
-        router.push({ name: 'result', state: { data } })
+        router.push({ 
+            name: 'result',
+            state: {
+                restaurants: data.restaurants,
+                query: query
+            }
+        })
     } catch (e) {
         alert('検索中にエラーが発生しました。もう一度お試しください。')
     } finally {
