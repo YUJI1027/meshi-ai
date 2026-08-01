@@ -13,7 +13,7 @@
                 <div class="bg-orange-100 border-l-4 border-orange-400 rounded-xl p-4 flex gap-3 mb-6">
                     <span class="text-2xl">🤖</span>
                     <p class="text-sm text-gray-700">
-                        <span v-if="ai_comment">{{ aiComment }}</span>
+                        <span v-if="aiComment">{{ aiComment }}</span>
                         <span v-else class="flex items-center gap-1 text-gray-400">
                             MeShi-AIがコメントを生成中
                             <span class="animate-bounce inline-block">.</span>
@@ -28,10 +28,10 @@
                 <!-- お店を紹介 -->
                 <div class="flex flex-col gap-4">
                     <div 
-                        v-for="(shop, index) in data.restaurants"
+                        v-for="(shop, index) in restaurants"
                         :key="index"
                         class="opacity-0 animate-fadeIn"
-                        :style="{ animationDelay: `${index * 0.15}s`, animationFillModel: 'forwards' }"
+                        :style="{ animationDelay: `${index * 0.15}s`, animationFillMode: 'forwards' }"
                     >
                         <ShopCard :shop="shop" />
                     </div>
@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import ShopCard from '../components/ShopCard.vue'
 
