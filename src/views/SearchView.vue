@@ -25,7 +25,7 @@
             <div class="w-full max-w-2xl">
                 <div class="text-center mb-8">
                     <p class="text-gray-700 font-bold text-3xl">今日、何食べたい？</p>
-                    <p class="text-gray-400 text-sm mt-2">気分やジャンルを入力してAIがお店を提案します</p>
+                    <p class="text-gray-400 text-sm mt-2">気分やジャンルを入力してMeShi-AIがお店を提案します</p>
                 </div>
             </div>
             
@@ -49,6 +49,17 @@
                             placeholder="例：ラーメン、カレー"
                             class="border border-gray-200 rounded-xl p-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
                         />
+                        <!-- ジャンルクリック選択 -->
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <button 
+                                v-for="tag in quickTags"
+                                :key="tag"
+                                @click="genre = tag"
+                                class="bg-white text-gray-600 text-xs px-3 py-2 rounded-full shadow-sm border-gray-100 hover:border-orange-300 hover:text-orange400 transition-colors"
+                            >
+                                {{ tag }}
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -92,24 +103,17 @@
                     :disabled="loading"
                     class="bg-orange-400 hover:bg-orange-500 disabled:bg-gray-300 text-white font-bold py-4 rounded-xl text-sm transition-colors mt-2"
                 >
-                    {{ loading ? 'AIがお店を探しています...' : '🔍️ お店を提案してもらう' }}
+                    <span v-if="loading" class="flex items-center justify-center gap-1">
+                        MeShi-AIがお店を探しています
+                        <span class="animate-bounce inline-block">.</span>
+                        <span class="animate-bounce inline-block [animation-delay:0.2s]">.</span>
+                        <span class="animate-bounce inline-block [animation-delay:0.4s]">.</span>
+                    </span>
+                    <span  v-else>🔍️ お店を提案してもらう</span>
                 </button>
             </div>
 
-            <!-- ジャンルクリック選択 -->
-            <div class="mt-6">
-                <p class="text-xs tex-gray-400 mb-2 text-center">よく使われるジャンル</p>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <button 
-                        v-for="tag in quickTags"
-                        :key="tag"
-                        @click="genre = tag"
-                        class="bg-white text-gray-600 text-xs px-3 py-2 rounded-full shadow-sm border-gray-100 hover:border-orange-300 hover:text-orange400 transition-colors"
-                    >
-                        {{ tag }}
-                    </button>
-                </div>
-            </div>
+            
         </div>
     </div>
 </template>
