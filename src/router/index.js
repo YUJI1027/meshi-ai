@@ -18,13 +18,11 @@ const router = createRouter({
       path: '/search',
       name: 'search',
       component: SearchView,
-      meta: { requiresAuth: true }
     },
     {
       path: '/result',
       name: 'result',
       component: ResultView,
-      meta: { requiresAuth: true }
     },
     {
       path: '/favorites',
