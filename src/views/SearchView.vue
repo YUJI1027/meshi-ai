@@ -6,16 +6,25 @@
             <h1 class="text-2xl font-bold mb-2">🍽️ MeshiAI</h1>
             <div class="flex gap-4 items-center">
                 <button 
+                    v-if="isLoggedIn"
                     @click="router.push('/favorites')"
                     class="text-orange-400 font-bold text-sm"
                 >
                     ❤️ お気に入り
                 </button>
                 <button 
+                    v-if="isLoggedIn"
                     @click="logout"
                     class="text-gray-400 text-sm"
                 >
                     ログアウト
+                </button>
+                <button 
+                    v-else
+                    @click="router.push('/login')"
+                    class="bg-orange-400 text-white font-bold text-sm px-4 py-2 rounded-xl"
+                >
+                    ログイン
                 </button>
             </div>
         </nav>
@@ -82,7 +91,7 @@
                 </div>
 
                 <!-- 表示件数選択 -->
-                <div class="flex flex-col gap-1">
+                <div v-if="isLoggedIn" class="flex flex-col gap-1">
                     <label class="font-bold text-sm">表示件数</label>
                     <div class="flex gap-2">
                         <button 
@@ -97,6 +106,9 @@
                             {{ count }}件
                         </button>
                     </div>
+                </div>
+                <div v-else class="text-xs text-gray-400 text-center bg-orange-50 rounded-xl p-3">
+                    🔒️ ログインすると表示件数を選択することができます。
                 </div>
                 <button 
                     @click="search"
@@ -119,7 +131,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '../supabase.js'
 
@@ -131,14 +143,24 @@ const mood = ref('')
 const genre = ref('')
 const area = ref('')
 const loading = ref(false)
-
-const quickTags = ['ラーメン', '寿司', '焼肉', 'イタリアン', '居酒屋', 'カフェ', '中華', 'カレー',]
-
-const currentLat = ref(null)
-const currentLng = ref(null)
-
 const resultCount =  ref(5)
 const countOptions = [3, 5, 7]
+const currentLat = ref(null)
+const currentLng = ref(null)
+const isLoggedIn = ref(false)
+const quickTags = ['ラーメン', '寿司', '焼肉', 'イタリアン', '居酒屋', 'カフェ', '中華', 'カレー',]
+
+// ===================
+// ログイン状態を確認
+// ===================
+onMounted(async () => {
+    const { data: { session } } = await supabase.auth.getSession()
+    isLoggedIn.value = !!session
+    // 未ログインは3件固定
+    if (!isLoggedIn.value) {
+        resultCount.value = 3
+    }
+})
 
 // ==========
 // 検索機能
