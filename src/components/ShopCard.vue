@@ -17,13 +17,13 @@
                 target="_blank"
                 class="text-xs text-blue-400 font-bold"
             >
-                🗺️ Googleマップで開く
+                🗺️ Googleマップを開く
             </a>
         </div>
 
         <button 
             @click="toggleFavorite"
-            class="text-sm mt-1"
+            class="text-sm mt-1 cursor-pointer font-bold transition-colors"
             :class="isFavorited ? 'text-red-400' : 'text-gray-400'"
         >
             {{ isFavorited ? '❤️ お気に入り済み' : '🤍 お気に入りに追加' }}
