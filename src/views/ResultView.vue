@@ -3,9 +3,9 @@
         <div class="w-full max-w-lg mx-auto">
             <button 
                 @click="router.push('/search')"
-                class="text-orange-400 font-bold mb-6 flex items-center gap-1"
+                class="text-orange-400 font-bold mb-6 flex items-center gap-1 cursor-pointer"
             >
-                ⇐戻る
+                ⇐ 検索へ戻る
             </button>
 
             <div v-if="restaurants.length > 0">
@@ -14,8 +14,8 @@
                     <span class="text-2xl">🤖</span>
                     <p class="text-sm text-gray-700">
                         <span v-if="aiComment">{{ aiComment }}</span>
-                        <span v-else class="flex items-center gap-1 text-gray-400">
-                            MeShi-AIがコメントを生成中
+                        <span v-else class="flex items-center gap-1 text-gray-400 pt-2">
+                            MeshiAIがコメントを生成中
                             <span class="animate-bounce inline-block">.</span>
                             <span class="animate-bounce inline-block [animation-delay:0.2s]">.</span>
                             <span class="animate-bounce inline-block [animation-delay:0.4s]">.</span>

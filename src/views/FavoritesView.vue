@@ -4,11 +4,14 @@
             <div class="flex justify-between items-center mb-6">
                 <button 
                     @click="router.push('/search')"
-                    class="text-orange-400 font-bold flex items-center gap-1"
+                    class="text-orange-400 font-bold flex items-center gap-1 cursor-pointer"
                 >
-                    ⇐戻る
+                    ⇐ 検索へ戻る
                 </button>
-                <h1 class="text-xl font-bold">❤️ お気に入り</h1>
+            </div>
+
+            <div v-if="favorites.length != 0" class="bg-white rounded-2xl shadow-md p-2">
+                <h1 class="text-xl font-bold text-center">お気に入り一覧</h1>
                 <div class="w-12"></div>
             </div>
 
@@ -17,7 +20,7 @@
                 <p>お気に入りはまだありません</p>
             </div>
 
-            <div v-else class="flex flex-col gap-4">
+            <div v-else class="flex flex-col gap-4 mt-6">
                 <div 
                     v-for="shop in favorites"
                     :key="shop.id"
@@ -30,9 +33,9 @@
                     <p class="text-xs text-gray-500">📍 {{ shop.address }}</p>
                     <button 
                         @click="removeFavorite(shop.id)"
-                        class="text-xs text-red-400 text-left"
+                        class="text-xs text-red-400 text-center cursor-pointer"
                     >
-                        ❌️ お気に入りから削除
+                        お気に入りから削除
                     </button>
                 </div>
             </div>

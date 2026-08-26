@@ -5,6 +5,7 @@ import SearchView from '../views/SearchView.vue'
 import ResultView from '../views/ResultView.vue'
 import LoginView from '../views/LoginView.vue'
 import FavoritesView from '../views/FavoritesView.vue'
+import PrivacyView from '../views/PrivacyView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -34,7 +35,12 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView
-    }
+    },
+    {
+      path: '/privacy',
+      name: 'privacy',
+      component: PrivacyView
+    },
   ],
 })
 

@@ -2,27 +2,27 @@
     <div class="min-h-screen bg-orange-50">
 
         <!-- ナビゲーションバー -->
-        <nav class="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold mb-2">🍽️ MeshiAI</h1>
+        <nav class="bg-white shadow-sm px-3 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">🍽️ MeshiAI</h1>
             <div class="flex gap-4 items-center">
                 <button 
                     v-if="isLoggedIn"
                     @click="router.push('/favorites')"
-                    class="text-orange-400 font-bold text-sm"
+                    class="text-orange-400 font-bold text-sm cursor-pointer"
                 >
                     ❤️ お気に入り
                 </button>
                 <button 
                     v-if="isLoggedIn"
                     @click="logout"
-                    class="text-gray-400 text-sm"
+                    class="text-gray-400 text-sm cursor-pointer"
                 >
                     ログアウト
                 </button>
                 <button 
                     v-else
                     @click="router.push('/login')"
-                    class="bg-orange-400 text-white font-bold text-sm px-4 py-2 rounded-xl"
+                    class="bg-orange-400 text-white font-bold text-xs px-3 py-2 rounded-xl cursor-pointer"
                 >
                     ログイン
                 </button>
@@ -33,8 +33,8 @@
         <div class="flex flex-col items-center px-4 py-12">
             <div class="w-full max-w-2xl">
                 <div class="text-center mb-8">
-                    <p class="text-gray-700 font-bold text-3xl">今日、何食べたい？</p>
-                    <p class="text-gray-400 text-sm mt-2">気分やジャンルを入力してMeShi-AIがお店を提案します</p>
+                    <p class="text-gray-700 font-bold text-2xl">今日、何食べたい？</p>
+                    <p class="text-gray-400 text-xs mt-2">気分やジャンルを入力して MeshiAI🤖 がお店を提案します</p>
                 </div>
             </div>
             
@@ -55,8 +55,8 @@
                         <label class="font-bold text-sm">ジャンル</label>
                         <input 
                             v-model="genre"
-                            placeholder="例：ラーメン、カレー"
-                            class="border border-gray-200 rounded-xl p-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
+                            placeholder="例：ラーメン"
+                            class="border border-gray-200 rounded-xl px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
                         />
                         <!-- ジャンルクリック選択 -->
                         <div class="flex flex-wrap gap-2 mt-2">
@@ -64,7 +64,7 @@
                                 v-for="tag in quickTags"
                                 :key="tag"
                                 @click="genre = tag"
-                                class="bg-white text-gray-600 text-xs px-3 py-2 rounded-full shadow-sm border-gray-100 hover:border-orange-300 hover:text-orange400 transition-colors"
+                                class="bg-white text-gray-600 text-xs px-3 py-2 rounded-full shadow-sm border-gray-100 hover:border-orange-300 hover:text-orange400 transition-colors cursor-pointer"
                             >
                                 {{ tag }}
                             </button>
@@ -77,15 +77,15 @@
                     <div class="flex gap-1">
                         <input 
                             v-model="area"
-                            placeholder="例：渋谷、新宿"
-                            class="border border-gray-200 rounded-xl p-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-300 flex-1"
+                            placeholder="例：渋谷"
+                            class="border border-gray-200 rounded-xl px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-orange-300 flex-1"
                         />
                         <button 
                             @click="getCurrentLocation"
-                            class="bg-orange-100 text-orange-400 rounded-xl px-3 text-sm"
+                            class="bg-orange-100 text-orange-400 rounded-xl px-3 py-2 text-sm cursor-pointer"
                             title="現在地を取得"
                         >
-                            📍 現在地を取得
+                            📍 現在地
                         </button>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                             :class="resultCount === count
                                 ?  'bg-orange-400 text-white'
                                 :   'bg-white text-gray-600 border border-gray-200'"
-                            class="px-4 py-2 rounded-xl text-sm font-bold transition-colors"
+                            class="px-4 py-2 rounded-xl text-sm font-bold transition-colors cursor-pointer"
                         >
                             {{ count }}件
                         </button>
@@ -113,15 +113,15 @@
                 <button 
                     @click="search"
                     :disabled="loading"
-                    class="bg-orange-400 hover:bg-orange-500 disabled:bg-gray-300 text-white font-bold py-4 rounded-xl text-sm transition-colors mt-2"
+                    class="bg-orange-400 hover:bg-orange-500 disabled:bg-gray-300 text-white font-bold py-4 rounded-xl text-sm transition-colors mt-2 cursor-pointer"
                 >
                     <span v-if="loading" class="flex items-center justify-center gap-1">
-                        MeShi-AIがお店を探しています
+                        MeshiAI🤖 がお店を探しています
                         <span class="animate-bounce inline-block">.</span>
                         <span class="animate-bounce inline-block [animation-delay:0.2s]">.</span>
                         <span class="animate-bounce inline-block [animation-delay:0.4s]">.</span>
                     </span>
-                    <span  v-else>🔍️ お店を提案してもらう</span>
+                    <span  v-else>🔍️ お店を検索</span>
                 </button>
             </div>
 
