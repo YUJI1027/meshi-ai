@@ -30,6 +30,15 @@
                         <h3 class="font-bold text-base">{{ shop.shop_name }}</h3>
                         <span class="text-yellow-400 font-bold text-sm">⭐️ {{ shop.rating ?? 'なし' }}</span>
                     </div>
+                    <div class="flex gap-2 mt-1">
+                        <a 
+                            :href="`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(shop.name + '' + shop.address)}`"
+                            target="_blank"
+                            class="text-xs text-blue-400 font-bold"
+                        >
+                            🗺️ Googleマップを開く
+                        </a>
+                    </div>
                     <p class="text-xs text-gray-500">📍 {{ shop.address }}</p>
                     <button 
                         @click="removeFavorite(shop.id)"
