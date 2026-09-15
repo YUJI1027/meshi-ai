@@ -32,20 +32,38 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { supabase } from '../supabase.js'
 
 const props = defineProps({
     shop: {
         type: Object,
-        request: true
+        required: true
     }
 })
 
 const isFavorited =  ref(false)
 
+// =============================
+// マウント時にお気に入り状態を確認
+// =============================
+onMounted(async () => {
+    const { data: {user} } = await supabase.auth.getUser()
+    if (!user) return
+
+    const { data } = await supabase
+        .from('favorites')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('shop_id', props.shop.name)
+        .single()
+
+        if (data) isFavorited.value = true
+})
+
 const toggleFavorite = async () => {
     const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return
 
     if (!isFavorited.value) {
         const { error } = await supabase.from('favorites').insert({
